@@ -1,0 +1,52 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="FinishedDrills")
+ */
+class FinishedDrill
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /** @ORM\Column(type="datetime") */
+    private $date;
+
+    /** @ORM\Column(type="string", length=50, nullable=true) */
+    private $nameForContact;
+
+    /** @ORM\Column(type="string", length=20) */
+    private $numberForContact;
+
+    /** @ORM\Column(type="string", length=100) */
+    private $coordinates;
+
+    /** @ORM\Column(type="integer") */
+    private $metres;
+
+    /** @ORM\Column(type="boolean") */
+    private $hasWater;
+
+    /** @ORM\Column(type="simple_array") */
+    private $foundWatersMetres;
+
+    /** @ORM\Column(type="string", length=200, nullable=true) */
+    private $referal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DetailedSoil", mappedBy="drill")
+     */
+    private $soils;
+
+    /** @ORM\ManyToOne(targetEntity="User", inversedBy="finishedDrills") */
+    private $user;
+}
