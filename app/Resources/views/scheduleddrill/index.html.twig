@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Scheduleddrills list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Nameforcontact</th>
+                <th>Numberforcontact</th>
+                <th>Coordinates</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scheduledDrill in scheduledDrills %}
+            <tr>
+                <td><a href="{{ path('scheduled_show', { 'id': scheduledDrill.id }) }}">{{ scheduledDrill.id }}</a></td>
+                <td>{% if scheduledDrill.date %}{{ scheduledDrill.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ scheduledDrill.nameForContact }}</td>
+                <td>{{ scheduledDrill.numberForContact }}</td>
+                <td>{{ scheduledDrill.coordinates }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('scheduled_show', { 'id': scheduledDrill.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('scheduled_edit', { 'id': scheduledDrill.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('scheduled_new') }}">Create a new scheduledDrill</a>
+        </li>
+    </ul>
+{% endblock %}
